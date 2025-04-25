@@ -16,3 +16,7 @@ We all tend to download stuffs , build stuffs and never organize our folders. Th
 ### Tech Tack
 - C++ for logic
 - Qt Framework for GUI
+
+
+### Demo GUI (will be replaced once app is done)
+![GUI](./images/GUI.jpg)
