@@ -18,5 +18,5 @@ We all tend to download stuffs , build stuffs and never organize our folders. Th
 - Qt Framework for GUI
 
 
-### Demo GUI (will be replaced once app is done)
+### GUI - Homepage
 ![GUI](./images/GUI.png)
