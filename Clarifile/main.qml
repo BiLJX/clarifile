@@ -115,7 +115,7 @@ ApplicationWindow {
                 }
 
                 // Organize Files
-                        // Organize Files
+
                 ColumnLayout {
                     spacing: 4
                     RowLayout {
@@ -144,6 +144,7 @@ ApplicationWindow {
                 }
 
                 // File Shredder
+                
                 Rectangle {
                     color: (window.currentView === "fileShredder" || maShredder.containsMouse) ? "#2A2A2A" : "transparent"
                     width: parent.width
