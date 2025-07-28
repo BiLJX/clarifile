@@ -19,4 +19,4 @@ We all tend to download stuffs , build stuffs and never organize our folders. Th
 
 
 ### Demo GUI (will be replaced once app is done)
-![GUI](https://ibb.co/DJG5Wq8)
+![GUI](./images/GUI.jpg)
