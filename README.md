@@ -71,4 +71,4 @@ Create a minimal Qt C++ application that loads and runs your QML file. Build and
 ```
 
 ### GUI - Homepage
-![GUI](./images/GUI.png)
+![GUI](./images/GUI_new.png)
