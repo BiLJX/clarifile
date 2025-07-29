@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
+import "common"  // import SideNav.qml
 
 ApplicationWindow {
     id: window
@@ -10,7 +11,9 @@ ApplicationWindow {
     visible: true
     title: qsTr("ClariFile")
     color: "#121212"
+
     property string currentView: "dashboard"
+    property string currentPage: ""  // empty = dashboard visible
 
     // Top bar
     Rectangle {
@@ -23,40 +26,27 @@ ApplicationWindow {
         RowLayout {
             anchors.fill: parent
             anchors.margins: 12
-
             Text {
                 text: "ClariFile"
                 font.pixelSize: 20
                 font.bold: true
                 color: "white"
             }
-
             Item { Layout.fillWidth: true }
-
             Button {
                 width: 36; height: 36
-                background: Rectangle {
-                    color: "#2E2E2E"
-                    radius: 18
-                }
+                background: Rectangle { color: "#2E2E2E"; radius: 18 }
                 contentItem: Image {
-                    source: "icons/help.svg"
-                    width: 20; height: 20
-                    anchors.centerIn: parent
-                    fillMode: Image.PreserveAspectFit
+                    source: "icons/help.svg"; width: 20; height: 20
+                    anchors.centerIn: parent; fillMode: Image.PreserveAspectFit
                 }
             }
             Button {
                 width: 20; height: 20
-                background: Rectangle {
-                    color: "#2E2E2E"
-                    radius: 18
-                }
+                background: Rectangle { color: "#2E2E2E"; radius: 18 }
                 contentItem: Image {
-                    source: "icons/user-circle.svg"
-                    width: 20; height: 20
-                    anchors.centerIn: parent
-                    fillMode: Image.PreserveAspectFit
+                    source: "icons/user-circle.svg"; width: 20; height: 20
+                    anchors.centerIn: parent; fillMode: Image.PreserveAspectFit
                 }
             }
         }
@@ -70,185 +60,101 @@ ApplicationWindow {
             right: parent.right
         }
 
-        // Sidebar
-        Rectangle {
-            id: sidebar
-            width: 240
-            color: "#1E1E1E"
+        // Side navigation panel
+        SideNav {
+            id: sidenav
             Layout.fillHeight: true
+            currentView: window.currentView
+            onCurrentViewChanged: window.currentView = currentView
 
-            ColumnLayout {
-                anchors.fill: parent
-                anchors.margins: 16
-                spacing: 24
-
-                // Dashboard Button
-                Rectangle {
-                    id: dashboardBtn
-                    color: (window.currentView === "dashboard" || maDashboard.containsMouse) ? "#2A2A2A" : "transparent"
-                    radius: 4
-                    width: parent.width
-                    height: 40
-
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.margins: 8
-                        spacing: 12
-                        Image {
-                            source: "icons/grid.svg"
-                            width: 20; height: 20
-                            fillMode: Image.PreserveAspectFit
-                        }
-                        Label {
-                            text: qsTr("Dashboard")
-                            font.pixelSize: 16
-                            color: "white"
-                        }
-                    }
-
-                    MouseArea {
-                        id: maDashboard
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: window.currentView = "dashboard"
-                    }
+            onNavigateTo: {
+                if (page === "") {
+                    window.currentPage = ""
+                    window.currentView = "dashboard"
+                } else {
+                    window.currentPage = page
+                    window.currentView = "" // clear dashboard view
                 }
-
-                // Organize Files
-
-                ColumnLayout {
-                    spacing: 4
-                    RowLayout {
-                        spacing: 8
-                        Image {
-                            source: "icons/file-text.svg"
-                            width: 20; height: 20
-                            fillMode: Image.PreserveAspectFit
-                        }
-                        Label {
-                            text: qsTr("Organize Files")
-                            font.pixelSize: 16
-                            color: "#CCCCCC"
-                        }
-                    }
-
-                    Item { Layout.preferredHeight: 10 }
-
-                    ColumnLayout {
-                        anchors.left: parent.left
-                        anchors.leftMargin: 54
-                        spacing: 4
-                        Label { text: qsTr("Default Organizing"); font.pixelSize: 14; color: "#AAAAAA" }
-                        Label { text: qsTr("Custom Organizing"); font.pixelSize: 14; color: "#AAAAAA" }
-                    }
-                }
-
-                // File Shredder
-                
-                Rectangle {
-                    color: (window.currentView === "fileShredder" || maShredder.containsMouse) ? "#2A2A2A" : "transparent"
-                    width: parent.width
-                    height: 40
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.margins: 8
-                        spacing: 4
-                        Image {
-                            source: "icons/file-remove.svg"
-                            width: 20; height: 20
-                            fillMode: Image.PreserveAspectFit
-                        }
-                        Label {
-                            text: qsTr("File Shredder")
-                            font.pixelSize: 16
-                            color: "#CCCCCC"
-                        }
-                    }
-
-                    MouseArea {
-                        id: maShredder
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: window.currentView = "fileShredder"
-                    }
-                }
-
-                Item { Layout.fillHeight: true }
             }
         }
 
-        // Main Content
+        // Main content area
         Rectangle {
             id: content
             color: "#121212"
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            ColumnLayout {
+            // Dashboard content, visible only if no page loaded
+            Item {
+                id: dashboardContent
                 anchors.fill: parent
-                anchors.margins: 24
-                spacing: 20
+                visible: window.currentPage === ""
 
-                // Header
                 ColumnLayout {
-                    spacing: 4
+                    anchors.fill: parent
+                    anchors.margins: 24
+                    spacing: 20
+
+                    // Your dashboard UI starts here
                     Text {
                         text: qsTr("Your system is clean")
                         font.pixelSize: 28
                         font.bold: true
                         color: "white"
                     }
+
                     Text {
                         text: qsTr("We are looking at your folders & files")
                         font.pixelSize: 14
                         color: "#AAAAAA"
                     }
-                }
 
-                // Recommendations
-                Rectangle {
-                    color: "#232323"
-                    radius: 6
-                    Layout.fillWidth: true
-                    height: 120
+                    // Recommendations box
+                    Rectangle {
+                        color: "#232323"
+                        radius: 6
+                        Layout.fillWidth: true
+                        height: 120
 
-                    ColumnLayout {
-                        anchors.fill: parent
-                        anchors.margins: 16
-                        spacing: 8
+                        ColumnLayout {
+                            anchors.fill: parent
+                            anchors.margins: 16
+                            spacing: 8
 
-                        Text { text: qsTr("Recommendations"); font.pixelSize: 16; font.bold: true; color: "white" }
+                            Text { text: qsTr("Recommendations"); font.pixelSize: 16; font.bold: true; color: "white" }
 
-                        RowLayout {
-                            spacing: 12
-                            Image {
-                                source: "icons/lightbulb.svg"
-                                width: 16; height: 16
-                                fillMode: Image.PreserveAspectFit
+                            RowLayout {
+                                spacing: 12
+                                Image {
+                                    source: "icons/lightbulb.svg"
+                                    width: 16; height: 16
+                                    fillMode: Image.PreserveAspectFit
+                                }
+                                Label {
+                                    text: qsTr("Consider organizing your Desktop folder")
+                                    font.pixelSize: 14
+                                    color: "#CCCCCC"
+                                }
                             }
-                            Label {
-                                text: qsTr("Consider organizing your Desktop folder")
-                                font.pixelSize: 14
-                                color: "#CCCCCC"
-                            }
-                        }
 
-                        RowLayout {
-                            spacing: 12
-                            Image {
-                                source: "icons/file-text.svg"
-                                width: 16; height: 16
-                                fillMode: Image.PreserveAspectFit
-                            }
-                            Label {
-                                text: qsTr("Unused ZIP files detected in Downloads")
-                                font.pixelSize: 14
-                                color: "#CCCCCC"
+                            RowLayout {
+                                spacing: 12
+                                Image {
+                                    source: "icons/file-text.svg"
+                                    width: 16; height: 16
+                                    fillMode: Image.PreserveAspectFit
+                                }
+                                Label {
+                                    text: qsTr("Unused ZIP files detected in Downloads")
+                                    font.pixelSize: 14
+                                    color: "#CCCCCC"
+                                }
                             }
                         }
                     }
-                }
 
+                
                 // Cards Grid
                 GridLayout {
                     columns: 2
@@ -363,15 +269,25 @@ ApplicationWindow {
                     }
                 }
 
-                Item { Layout.fillHeight: true }
 
-                Text {
-                    text: qsTr("Last Organized: July 28, 2025")
-                    font.pixelSize: 12
-                    color: "#666666"
-                    horizontalAlignment: Text.AlignRight
-                    Layout.fillWidth: true
+                    Item { Layout.fillHeight: true }
+
+                    Text {
+                        text: qsTr("© ClariFile 2025 - KU CS-I Project Group")
+                        font.pixelSize: 12
+                        color: "#666666"
+                        horizontalAlignment: Text.AlignRight
+                        Layout.fillWidth: true
+                    }
                 }
+            }
+
+            // Loader for other pages
+            Loader {
+                id: pageLoader
+                anchors.fill: parent
+                source: window.currentPage
+                visible: window.currentPage !== ""
             }
         }
     }
