@@ -201,7 +201,7 @@ Item {
                 }
 
               Button {
-        text: "Open"
+        text: "Back"
          background: Rectangle {
         color: "#096D9B" // Blue background
         radius: 6

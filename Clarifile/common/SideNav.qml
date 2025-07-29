@@ -107,13 +107,16 @@ Rectangle {
                 anchors.margins: 8
                 spacing: 12
                 Image { source: "../icons/file-text.svg"; width: 20; height: 20; fillMode: Image.PreserveAspectFit }
-                Label { text: "Manual Organizing"; font.pixelSize: 16; color: "white" }
+                Label { text: "Custom Organizing"; font.pixelSize: 16; color: "white" }
             }
             MouseArea {
                 id: maCustom
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: currentView = "customorganize"
+          onClicked: {
+               currentView = "customorganize"
+                    navigateTo("pages/CustomOrganize.qml")
+                }
             }
         }
 
@@ -149,8 +152,12 @@ Rectangle {
                 id: maShred
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: currentView = "fileShredder"
+                   onClicked: {
+               currentView = "fileShredder"
+                    navigateTo("pages/FileShredder.qml")
+                }
             }
+        
         }
 
         Item { Layout.fillHeight: true }
