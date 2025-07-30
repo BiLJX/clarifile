@@ -59,7 +59,7 @@ Item {
                     }
 
                     TextField {
-                        id: autoRootPath
+                        id: srcRootPath
                         placeholderText: "Enter path..."
                         Layout.fillWidth: true
                         font.pixelSize: 13
@@ -82,7 +82,7 @@ Item {
                         onClicked: {
                                 var path = folderPicker.pickFolder()
                                 if (path !== "")
-                                autoRootPath.text = path
+                                srcRootPath.text = path
                             }
                     }
                 }
@@ -125,7 +125,7 @@ Item {
                     }
 
                     TextField {
-                        id: autoRootPathII
+                        id: destPath
                         placeholderText: "Enter path..."
                         Layout.fillWidth: true
                         font.pixelSize: 13
@@ -148,9 +148,51 @@ Item {
                          onClicked: {
                                  var path = folderPicker.pickFolder()
                                  if (path !== "")
-                                 autoRootPathII.text = path
+                                 destPath.text = path
                              }
                      }
+                }
+            }
+        }
+
+        Rectangle {
+            color: "#1e1e1e"
+            radius: 6
+            Layout.fillWidth: true
+            height: 120
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 16
+                spacing: 10
+
+                Label {
+                    text: "Start organizing"
+                    font.pixelSize: 16
+                    font.bold: true
+                    color: "#ffffff"
+                }
+
+                Label {
+                    text: "Click Organize to start organizing"
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: 13
+                    color: "#aaaaaa"
+                }
+
+                Button {
+                    text: "Organize"
+                    background: Rectangle {
+                        color: "#096D9B"
+                        radius: 6
+                    }
+                    onClicked: {
+                        if (srcRootPath.text.length > 0 && destPath.text.length > 0) {
+                                    fileOrganizer.organize(srcRootPath.text, destPath.text)
+                                } else {
+                                    console.log("Please select both source and destination folders.")
+                                }
+                    }
                 }
             }
         }
