@@ -27,6 +27,8 @@
         <file>icons/auto-organize.svg</file>
         <file>icons/file-multiple.svg</file>
         <file>icons/warning.svg</file>
+                   <file>icons/logo.ico</file>
+
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

@@ -32,3 +32,4 @@ DISTFILES += \
 
 QT += svg
 
+RC_FILE = appicon.rc

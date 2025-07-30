@@ -6,8 +6,8 @@ import "common"  // import SideNav.qml
 
 ApplicationWindow {
     id: window
-    width: 960
-    height: 640
+    width: 1160
+    height: 740
     visible: true
     title: qsTr("ClariFile")
     color: "#121212"

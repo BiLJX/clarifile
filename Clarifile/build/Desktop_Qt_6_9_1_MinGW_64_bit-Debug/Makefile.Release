@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra -fexception
 INCPATH       = -I../../../Clarifile -I. -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -Irelease -I. -I/include -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\6.9.1\mingw_64\lib\libQt6Widgets.a C:\Qt\6.9.1\mingw_64\lib\libQt6Quick.a C:\Qt\6.9.1\mingw_64\lib\libQt6OpenGL.a C:\Qt\6.9.1\mingw_64\lib\libQt6Svg.a C:\Qt\6.9.1\mingw_64\lib\libQt6Gui.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlMeta.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlModels.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlWorkerScript.a C:\Qt\6.9.1\mingw_64\lib\libQt6Qml.a C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a -lmingw32 C:\Qt\6.9.1\mingw_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        C:\Qt\6.9.1\mingw_64\lib\libQt6Widgets.a C:\Qt\6.9.1\mingw_64\lib\libQt6Quick.a C:\Qt\6.9.1\mingw_64\lib\libQt6OpenGL.a C:\Qt\6.9.1\mingw_64\lib\libQt6Svg.a C:\Qt\6.9.1\mingw_64\lib\libQt6Gui.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlMeta.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlModels.a C:\Qt\6.9.1\mingw_64\lib\libQt6QmlWorkerScript.a C:\Qt\6.9.1\mingw_64\lib\libQt6Qml.a C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a release\appicon_res.o -lmingw32 C:\Qt\6.9.1\mingw_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = C:\Qt\6.9.1\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = release\appicon_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -85,8 +85,11 @@ DESTDIR_TARGET = release\FileOrganizerShredder.exe
 first: all
 all: Makefile.Release  release/FileOrganizerShredder.exe
 
-release/FileOrganizerShredder.exe: C:/Qt/6.9.1/mingw_64/lib/libQt6Widgets.a C:/Qt/6.9.1/mingw_64/lib/libQt6Quick.a C:/Qt/6.9.1/mingw_64/lib/libQt6OpenGL.a C:/Qt/6.9.1/mingw_64/lib/libQt6Svg.a C:/Qt/6.9.1/mingw_64/lib/libQt6Gui.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlMeta.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlModels.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlWorkerScript.a C:/Qt/6.9.1/mingw_64/lib/libQt6Qml.a C:/Qt/6.9.1/mingw_64/lib/libQt6Network.a C:/Qt/6.9.1/mingw_64/lib/libQt6Core.a C:/Qt/6.9.1/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h $(OBJECTS) 
+release/FileOrganizerShredder.exe: C:/Qt/6.9.1/mingw_64/lib/libQt6Widgets.a C:/Qt/6.9.1/mingw_64/lib/libQt6Quick.a C:/Qt/6.9.1/mingw_64/lib/libQt6OpenGL.a C:/Qt/6.9.1/mingw_64/lib/libQt6Svg.a C:/Qt/6.9.1/mingw_64/lib/libQt6Gui.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlMeta.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlModels.a C:/Qt/6.9.1/mingw_64/lib/libQt6QmlWorkerScript.a C:/Qt/6.9.1/mingw_64/lib/libQt6Qml.a C:/Qt/6.9.1/mingw_64/lib/libQt6Network.a C:/Qt/6.9.1/mingw_64/lib/libQt6Core.a C:/Qt/6.9.1/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h $(OBJECTS) release/appicon_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS) $(LIBS)
+
+release/appicon_res.o: ../../appicon.rc
+	windres -i ..\..\appicon.rc -o release\appicon_res.o --include-dir=./../.. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Release ..\..\FileOrganizerShredder.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -98,6 +101,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\main.o release\mainwindow.o release\fileorganizer.o release\fileshredder.o release\qrc_resources.o release\moc_FolderPicker.o release\moc_mainwindow.o release\moc_fileorganizer.o release\moc_fileshredder.o
+	-$(DEL_FILE) release\appicon_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -145,6 +149,7 @@ release/qrc_resources.cpp: ../../resources.qrc \
 		../../icons/file-blue.svg \
 		../../icons/auto-organize.svg \
 		../../icons/file-multiple.svg \
+		../../icons/logo.ico \
 		../../icons/warning.svg
 	C:\Qt\6.9.1\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o release\qrc_resources.cpp
 
@@ -176,6 +181,7 @@ release/qrc_resources.cpp: ../../resources.qrc \
 		../../icons/file-blue.svg \
 		../../icons/auto-organize.svg \
 		../../icons/file-multiple.svg \
+		../../icons/logo.ico \
 		../../icons/warning.svg
 	C:\Qt\6.9.1\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o release\qrc_resources.cpp
 
@@ -207,6 +213,7 @@ release/qrc_resources.cpp: ../../resources.qrc \
 		../../icons/file-blue.svg \
 		../../icons/auto-organize.svg \
 		../../icons/file-multiple.svg \
+		../../icons/logo.ico \
 		../../icons/warning.svg
 	C:\Qt\6.9.1\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o release\qrc_resources.cpp
 
@@ -429,7 +436,7 @@ release/moc_FolderPicker.cpp: ../../FolderPicker.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include D:/Data/Programming/Uni/ClariFile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -ID:/Data/Programming/Uni/ClariFile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\FolderPicker.h -o release\moc_FolderPicker.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\FolderPicker.h -o release\moc_FolderPicker.cpp
 
 release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMainWindow \
@@ -633,7 +640,7 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtabwidget.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include D:/Data/Programming/Uni/ClariFile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -ID:/Data/Programming/Uni/ClariFile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
 
 release/moc_fileorganizer.cpp: ../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QObject \
@@ -747,9 +754,13 @@ release/moc_fileorganizer.cpp: ../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMap \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qmap.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata_impl.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include D:/Data/Programming/Uni/ClariFile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -ID:/Data/Programming/Uni/ClariFile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\fileorganizer.h -o release\moc_fileorganizer.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\fileorganizer.h -o release\moc_fileorganizer.cpp
 
 release/moc_fileshredder.cpp: ../../fileshredder.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QObject \
@@ -865,7 +876,7 @@ release/moc_fileshredder.cpp: ../../fileshredder.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include D:/Data/Programming/Uni/ClariFile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -ID:/Data/Programming/Uni/ClariFile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\fileshredder.h -o release\moc_fileshredder.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Lenovo/Desktop/ku-project/clarifile/clarifile/Clarifile -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtQuick -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtSvg -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtQmlMeta -IC:/Qt/6.9.1/mingw_64/include/QtQmlModels -IC:/Qt/6.9.1/mingw_64/include/QtQmlWorkerScript -IC:/Qt/6.9.1/mingw_64/include/QtQml -IC:/Qt/6.9.1/mingw_64/include/QtQmlIntegration -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\fileshredder.h -o release\moc_fileshredder.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -890,8 +901,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplication \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication.h \
+release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtcoreglobal.h \
@@ -941,6 +953,8 @@ release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qversiontagging.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtgui-config.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtguiexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qstring.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qchar.h \
@@ -1034,11 +1048,28 @@ release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtCore/q20utility.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qwindowdefs.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qpoint.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qsize.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qmargins.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qcursor.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qbitmap.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpixmap.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qrect.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qcolor.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qrgb.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qrgba64.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qimage.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpixelformat.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtransform.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpolygon.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qregion.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qspan.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/q20iterator.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qline.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.9.1/mingw_64/include/QtQml/QQmlApplicationEngine \
 		C:/Qt/6.9.1/mingw_64/include/QtQml/qqmlapplicationengine.h \
@@ -1067,20 +1098,20 @@ release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qpointer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qversionnumber.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qspan.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/q20iterator.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtyperevision.h \
 		C:/Qt/6.9.1/mingw_64/include/QtQml/qqmlregistration.h \
 		C:/Qt/6.9.1/mingw_64/include/QtQmlIntegration/qqmlintegration.h \
 		C:/Qt/6.9.1/mingw_64/include/QtQml/qqmlerror.h \
 		C:/Qt/6.9.1/mingw_64/include/QtQml/qqmlabstracturlinterceptor.h \
-		../../FolderPicker.h \
+		C:/Qt/6.9.1/mingw_64/include/QtQml/QQmlContext \
+		C:/Qt/6.9.1/mingw_64/include/QtQml/qqmlcontext.h \
+		../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QObject \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMap \
+		../../FolderPicker.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFileDialog \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qfiledialog.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qdirlisting.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qfiledevice.h \
@@ -1092,18 +1123,6 @@ release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qaction.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qkeysequence.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qicon.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpixmap.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpaintdevice.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qrect.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qcolor.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qrgb.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qrgba64.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qimage.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpixelformat.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtransform.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpolygon.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qregion.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qline.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpalette.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qbrush.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qfont.h \
@@ -1112,8 +1131,6 @@ release/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtGui/QGuiApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qfontinfo.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qfontvariableaxis.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qsizepolicy.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qcursor.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qbitmap.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qevent.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qeventpoint.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qvector2d.h \
@@ -1485,6 +1502,10 @@ release/fileorganizer.o: ../../fileorganizer.cpp ../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMap \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qmap.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata_impl.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDir \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qdirlisting.h \
@@ -1500,10 +1521,7 @@ release/fileorganizer.o: ../../fileorganizer.cpp ../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtextstream.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcontiguouscache.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qsharedpointer.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qmap.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qshareddata_impl.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qset.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qhash.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -1514,7 +1532,8 @@ release/fileorganizer.o: ../../fileorganizer.cpp ../../fileorganizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfoList \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfo
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfo \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QSet
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\fileorganizer.o ..\..\fileorganizer.cpp
 
 release/fileshredder.o: ../../fileshredder.cpp ../../fileshredder.h \
