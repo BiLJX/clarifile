@@ -12,6 +12,7 @@ SOURCES += \
     fileshredder.cpp
 
 HEADERS += \
+    FolderPicker.h \
     mainwindow.h \
     fileorganizer.h \
     fileshredder.h
@@ -30,3 +31,4 @@ DISTFILES += \
     main.qml
 
 QT += svg
+
