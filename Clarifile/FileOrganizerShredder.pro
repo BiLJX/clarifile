@@ -19,5 +19,14 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+RESOURCES += resources.qrc \
+    resources.qrc
+
+QT += quick qml
+
 RESOURCES += resources.qrc
 
+DISTFILES += \
+    main.qml
+
+QT += svg

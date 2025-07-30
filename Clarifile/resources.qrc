@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>icons/bulb-blue.svg</file>
+        <file>icons/file-blue.svg</file>
+        <file>icons/file-remove.svg</file>
+        <file>icons/file-text.svg</file>
+        <file>icons/grid.svg</file>
+        <file>icons/help.svg</file>
+        <file>icons/help-circle.svg</file>
+        <file>icons/lightbulb.svg</file>
+        <file>icons/minimize.svg</file>
+        <file>icons/play-circle.svg</file>
+        <file>icons/settings.svg</file>
+        <file>icons/user-circle.svg</file>
+        <file>icons/x.svg</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>
