@@ -1,4 +1,6 @@
 QT += core gui
+QT += sql
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -6,6 +8,7 @@ TARGET = FileOrganizerShredder
 TEMPLATE = app
 
 SOURCES += \
+    databasemanager.cpp \
     main.cpp \
     mainwindow.cpp \
     fileorganizer.cpp \
@@ -13,6 +16,7 @@ SOURCES += \
 
 HEADERS += \
     FolderPicker.h \
+    databasemanager.h \
     mainwindow.h \
     fileorganizer.h \
     fileshredder.h

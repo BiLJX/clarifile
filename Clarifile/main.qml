@@ -154,120 +154,176 @@ ApplicationWindow {
                         }
                     }
 
-                
-                // Cards Grid
-                GridLayout {
-                    columns: 2
-                    rowSpacing: 20
-                    columnSpacing: 20
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 300
-
-                    // Documentation
+                    // === NEW RECENT FOLDERS SECTION ===
                     Rectangle {
+                        id: recentFoldersBox
                         color: "#232323"
                         radius: 6
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 120
+                        height: 200
 
                         ColumnLayout {
-                            anchors.centerIn: parent
-                            spacing: 8
-                            Image {
-                                source: "icons/file-blue.svg"
-                                width: 54; height: 54
-                                fillMode: Image.PreserveAspectFit
-                                Layout.alignment: Qt.AlignHCenter
-                            }
-                            Label {
-                                text: qsTr("Documentation")
+                            anchors.fill: parent
+                            anchors.margins: 16
+                            spacing: 10
+
+                            Text {
+                                text: qsTr("Recent Folders")
                                 font.pixelSize: 16
+                                font.bold: true
                                 color: "white"
-                                Layout.alignment: Qt.AlignLeft
-                                width: parent.width * 0.8
+                            }
+
+                            Button {
+                                text: "Pick Folder"
+                                width: 150
+                                onClicked: {
+                                    var folder = folderPicker.pickFolder()
+                                    if (folder && folder !== "") {
+                                        dbManager.addRecentFolder(folder)
+                                    }
+                                }
+                            }
+
+                            ListView {
+                                id: recentFoldersList
+                                model: recentFoldersModel
+                                clip: true
+                                height: 120
+                                Layout.fillWidth: true
+                                delegate: Rectangle {
+                                    color: "#333333"
+                                    radius: 4
+                                    width: parent.width
+                                    height: 30
+                                    border.color: "#555555"
+                                    Text {
+                                        text: modelData
+                                        color: "white"
+                                        verticalAlignment: Text.AlignVCenter
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 10
+                                        elide: Text.ElideRight
+                                    }
+                                }
                             }
                         }
                     }
 
-                    // Tutorials
-                    Rectangle {
-                        color: "#232323"
-                        radius: 6
+                    // Cards Grid
+                    GridLayout {
+                        columns: 2
+                        rowSpacing: 20
+                        columnSpacing: 20
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 120
+                        Layout.preferredHeight: 300
 
-                        ColumnLayout {
-                            anchors.centerIn: parent
-                            spacing: 8
-                            Image {
-                                source: "icons/play-circle.svg"
-                                width: 54; height: 54
-                                fillMode: Image.PreserveAspectFit
-                                Layout.alignment: Qt.AlignHCenter
+                        // Documentation
+                        Rectangle {
+                            color: "#232323"
+                            radius: 6
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 120
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 8
+                                Image {
+                                    source: "icons/file-blue.svg"
+                                    width: 54; height: 54
+                                    fillMode: Image.PreserveAspectFit
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                                Label {
+                                    text: qsTr("Documentation")
+                                    font.pixelSize: 16
+                                    color: "white"
+                                    Layout.alignment: Qt.AlignLeft
+                                    width: parent.width * 0.8
+                                }
                             }
-                            Label {
-                                text: qsTr("Our Tutorials")
-                                font.pixelSize: 16
-                                color: "white"
-                                Layout.alignment: Qt.AlignLeft
-                                width: parent.width * 0.8
+                        }
+
+                        // Tutorials
+                        Rectangle {
+                            color: "#232323"
+                            radius: 6
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 120
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 8
+                                Image {
+                                    source: "icons/play-circle.svg"
+                                    width: 54; height: 54
+                                    fillMode: Image.PreserveAspectFit
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                                Label {
+                                    text: qsTr("Our Tutorials")
+                                    font.pixelSize: 16
+                                    color: "white"
+                                    Layout.alignment: Qt.AlignLeft
+                                    width: parent.width * 0.8
+                                }
+                            }
+                        }
+
+                        // How it Works
+                        Rectangle {
+                            color: "#232323"
+                            radius: 6
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 120
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 8
+                                Image {
+                                    source: "icons/bulb-blue.svg"
+                                    width: 54; height: 54
+                                    fillMode: Image.PreserveAspectFit
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                                Label {
+                                    text: qsTr("How it Works")
+                                    font.pixelSize: 16
+                                    color: "white"
+                                    Layout.alignment: Qt.AlignLeft
+                                    width: parent.width * 0.8
+                                }
+                            }
+                        }
+
+                        // Preferences
+                        Rectangle {
+                            color: "#232323"
+                            radius: 6
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 120
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 8
+                                Image {
+                                    source: "icons/settings.svg"
+                                    width: 54; height: 54
+                                    fillMode: Image.PreserveAspectFit
+                                    Layout.alignment: Qt.AlignHCenter
+
+                                }
+                                Label {
+                                    text: qsTr("Preferences")
+                                    font.pixelSize: 16
+                                    color: "white"
+                                    Layout.alignment: Qt.AlignLeft
+                                    width: parent.width * 0.8
+                                }
                             }
                         }
                     }
-
-                    // How it Works
-                    Rectangle {
-                        color: "#232323"
-                        radius: 6
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 120
-
-                        ColumnLayout {
-                            anchors.centerIn: parent
-                            spacing: 8
-                            Image {
-                                source: "icons/bulb-blue.svg"
-                                width: 54; height: 54
-                                fillMode: Image.PreserveAspectFit
-                                Layout.alignment: Qt.AlignHCenter
-                            }
-                            Label {
-                                text: qsTr("How it Works")
-                                font.pixelSize: 16
-                                color: "white"
-                                Layout.alignment: Qt.AlignLeft
-                                width: parent.width * 0.8
-                            }
-                        }
-                    }
-
-                    // Preferences
-                    Rectangle {
-                        color: "#232323"
-                        radius: 6
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 120
-
-                        ColumnLayout {
-                            anchors.centerIn: parent
-                            spacing: 8
-                            Image {
-                                source: "icons/settings.svg"
-                                width: 54; height: 54
-                                fillMode: Image.PreserveAspectFit
-                                Layout.alignment: Qt.AlignHCenter
-                                
-                            }
-                            Label {
-                                text: qsTr("Preferences")
-                                font.pixelSize: 16
-                                color: "white"
-                                Layout.alignment: Qt.AlignLeft
-                                width: parent.width * 0.8
-                            }
-                        }
-                    }
-                }
 
 
                     Item { Layout.fillHeight: true }
@@ -291,4 +347,26 @@ ApplicationWindow {
             }
         }
     }
+
+    // --------- Recent Folders List Model & Loader Logic ---------
+    ListModel {
+        id: recentFoldersModel
+    }
+
+    function loadRecentFolders() {
+        recentFoldersModel.clear()
+        var folders = dbManager.getRecentFolders()
+        for (var i = 0; i < folders.length; i++) {
+            recentFoldersModel.append(folders[i])
+        }
+    }
+
+    Component.onCompleted: loadRecentFolders()
+
+    Connections {
+        target: dbManager
+        onRecentFoldersChanged: loadRecentFolders()
+    }
 }
+
+
