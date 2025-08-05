@@ -42,3 +42,7 @@ DISTFILES += \
 QT += svg
 
 RC_FILE = appicon.rc
+
+QML_FILES += \
+    $$files(pages/*.qml) \
+    $$files(pages/DefaultOrganize/*.qml)
