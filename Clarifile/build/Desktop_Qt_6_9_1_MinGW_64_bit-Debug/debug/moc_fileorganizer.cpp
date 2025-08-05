@@ -41,13 +41,20 @@ template <> constexpr inline auto FileOrganizer::qt_create_metaobjectdata<qt_met
         "FileOrganizer",
         "logMessage",
         "",
-        "message",
+        "msg",
+        "onDirectoryChanged",
+        "path",
         "organize",
         "directoryPath",
         "destinationDirectory",
         "customOrganize",
         "QMap<QString,QString>",
-        "customFolders"
+        "customFolders",
+        "startAutoOrganizing",
+        "sourcePath",
+        "destPath",
+        "intervalMs",
+        "stopAutoOrganizing"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -55,14 +62,28 @@ template <> constexpr inline auto FileOrganizer::qt_create_metaobjectdata<qt_met
         QtMocHelpers::SignalData<void(const QString &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 3 },
         }}),
+        // Slot 'onDirectoryChanged'
+        QtMocHelpers::SlotData<void(const QString &)>(4, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 5 },
+        }}),
         // Method 'organize'
-        QtMocHelpers::MethodData<void(const QString &, const QString &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 5 }, { QMetaType::QString, 6 },
+        QtMocHelpers::MethodData<void(const QString &, const QString &)>(6, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 7 }, { QMetaType::QString, 8 },
         }}),
         // Method 'customOrganize'
-        QtMocHelpers::MethodData<void(const QString &, const QMap<QString,QString> &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 5 }, { 0x80000000 | 8, 9 },
+        QtMocHelpers::MethodData<void(const QString &, const QMap<QString,QString> &)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 7 }, { 0x80000000 | 10, 11 },
         }}),
+        // Method 'startAutoOrganizing'
+        QtMocHelpers::MethodData<void(const QString &, const QString &, int)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 13 }, { QMetaType::QString, 14 }, { QMetaType::Int, 15 },
+        }}),
+        // Method 'startAutoOrganizing'
+        QtMocHelpers::MethodData<void(const QString &, const QString &)>(12, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
+            { QMetaType::QString, 13 }, { QMetaType::QString, 14 },
+        }}),
+        // Method 'stopAutoOrganizing'
+        QtMocHelpers::MethodData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -87,8 +108,12 @@ void FileOrganizer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->logMessage((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 1: _t->organize((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
-        case 2: _t->customOrganize((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QMap<QString,QString>>>(_a[2]))); break;
+        case 1: _t->onDirectoryChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->organize((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 3: _t->customOrganize((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QMap<QString,QString>>>(_a[2]))); break;
+        case 4: _t->startAutoOrganizing((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 5: _t->startAutoOrganizing((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 6: _t->stopAutoOrganizing(); break;
         default: ;
         }
     }
@@ -117,14 +142,14 @@ int FileOrganizer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 7;
     }
     return _id;
 }

@@ -81,9 +81,8 @@ Item {
               Button {
     padding: 0
 
-    contentItem: Text {
+    contentItem: Text{
         text: "Select folder"
-
         color: "#096D9B"
         font.underline: true
 
@@ -135,7 +134,7 @@ Item {
 
 
              TextField {
-    id: autoRootPathII
+    id: autoDestPath
     placeholderText: "Enter path....."
     Layout.fillWidth: true
   Layout.fillHeight: true
@@ -167,12 +166,61 @@ Item {
     onClicked: {
             var path = folderPicker.pickFolder()
             if (path !== "")
-            autoRootPathII.text = path
+            autoDestPath.text = path
         }
 }
 
 
 
+                }
+            }
+        }
+
+        Rectangle {
+            color: "#1e1e1e"
+            radius: 6
+            Layout.fillWidth: true
+            height: 120
+
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 16
+                spacing: 10
+
+                Label {
+                    text: "Start Organizing"
+                    font.pixelSize: 16
+                    font.bold: true
+                    color: "#ffffff"
+                }
+
+                // Label {
+                //     text: "You need to choose the folder manually each time you organize files. Automatic selection is not enabled."
+                //     wrapMode: Text.WordWrap
+                //     font.pixelSize: 13
+                //     color: "#aaaaaa"
+                // }
+
+                Button {
+                    text: "Start Auto-Organizing"
+                    background: Rectangle {
+                        color: "#096D9B"
+                        radius: 6
+                    }
+                    onClicked: {
+                        if (autoRootPath.text.length > 0 && autoDestPath.text.length > 0) {
+                                    fileOrganizer.startAutoOrganizing(autoRootPath.text, autoDestPath.text, 5000) // every 5 seconds
+                                }
+                    }
+                }
+                Button {
+                    text: "Stop Auto-Organizing"
+                    background: Rectangle {
+                        color: "#f00"
+                        radius: 6
+                    }
+                    onClicked: fileOrganizer.stopAutoOrganizing()
                 }
             }
         }
@@ -204,19 +252,18 @@ Item {
                     color: "#aaaaaa"
                 }
 
-              Button {
-        text: "Open"
-           background: Rectangle {
-        color: "#096D9B" 
-        radius: 6
-    }
-        onClicked: {
-  
-            Qt.callLater(() => {
-                window.currentPage = "pages/DefaultOrganize/ManualOrganize.qml"
-            })
-        }
-    }
+                Button {
+                    text: "Open"
+                    background: Rectangle {
+                        color: "#096D9B"
+                        radius: 6
+                    }
+                    onClicked: {
+                        Qt.callLater(() => {
+                            window.currentPage = "pages/DefaultOrganize/ManualOrganize.qml"
+                        })
+                    }
+                }
             }
         }
 

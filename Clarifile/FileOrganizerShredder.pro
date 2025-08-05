@@ -1,5 +1,5 @@
 QT += core gui
-
+QT += sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = FileOrganizerShredder
@@ -9,13 +9,15 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     fileorganizer.cpp \
-    fileshredder.cpp
+    fileshredder.cpp \
+    pathmanager.cpp
 
 HEADERS += \
     FolderPicker.h \
     mainwindow.h \
     fileorganizer.h \
-    fileshredder.h
+    fileshredder.h \
+    pathmanager.h
 
 FORMS += \
     mainwindow.ui
@@ -32,3 +34,4 @@ DISTFILES += \
 
 QT += svg
 
+RC_FILE = appicon.rc

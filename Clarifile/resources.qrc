@@ -15,7 +15,6 @@
         <file>icons/user-circle.svg</file>
         <file>icons/x.svg</file>
         <file>common/SideNav.qml</file>
-        <file>controllers/PopupController.qml</file>
         <file>pages/DefaultOrganize/AutoOrganize.qml</file>
         <file>pages/DefaultOrganize/ManualOrganize.qml</file>
         <file>pages/CustomOrganize.qml</file>
@@ -27,6 +26,8 @@
         <file>icons/auto-organize.svg</file>
         <file>icons/file-multiple.svg</file>
         <file>icons/warning.svg</file>
+                   <file>icons/logo.ico</file>
+
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

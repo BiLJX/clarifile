@@ -5,7 +5,43 @@
 #include <QFileInfo>
 #include <QSet>
 
-FileOrganizer::FileOrganizer(QObject *parent) : QObject(parent) {}
+FileOrganizer::FileOrganizer(QObject *parent)
+    : QObject(parent)
+{
+    // connect(&m_timer, &QTimer::timeout, this, [this]() {
+    //     this->organize(m_autoSourcePath, m_autoDestPath);
+    // });
+    connect(&m_watcher, &QFileSystemWatcher::directoryChanged,
+            this, &FileOrganizer::onDirectoryChanged);
+}
+
+void FileOrganizer::startAutoOrganizing(const QString &sourcePath, const QString &destPath, int intervalMs)
+{
+    if (sourcePath.isEmpty() || destPath.isEmpty()) {
+        emit logMessage("Source or destination path is empty.");
+        return;
+    }
+
+    m_autoSourcePath = sourcePath;
+    m_autoDestPath = destPath;
+    if (!m_watcher.directories().contains(sourcePath)) {
+        m_watcher.addPath(sourcePath);
+        emit logMessage("Started watching directory: " + sourcePath);
+    }
+}
+
+void FileOrganizer::stopAutoOrganizing()
+{
+    m_timer.stop();
+        m_watcher.removePaths(m_watcher.directories());
+    emit logMessage("Stopped auto-organizing");
+}
+
+void FileOrganizer::onDirectoryChanged(const QString &path)
+{
+    Q_UNUSED(path)
+    organize(m_autoSourcePath, m_autoDestPath);
+}
 
 void FileOrganizer::organize(const QString &directoryPath, const QString &destinationDirectory) {
     QDir srcDir(directoryPath);
