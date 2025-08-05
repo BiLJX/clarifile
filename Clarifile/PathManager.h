@@ -23,9 +23,13 @@ public:
     Q_INVOKABLE void loadPaths();
     Q_INVOKABLE void updateRootPath(const QString &path);
     Q_INVOKABLE void updateDestPath(const QString &path);
+    Q_INVOKABLE QMap<QString, QString> customPaths() const;
+    Q_INVOKABLE void updateCustomPath(const QString &category, const QString &path);
+    Q_INVOKABLE QVariantMap customPathsAsVariantMap() const;
 
 signals:
     void pathChanged();
+    void customPathsChanged();
 
 private:
     void initDB();

@@ -27,6 +27,55 @@ Item {
                 font.pixelSize: 14
                 color: "#cccccc"
             }
+
+            RowLayout {
+                spacing: 20
+                Layout.fillWidth: true
+                Button {
+                    padding: 0
+                    contentItem: Text {
+                        text: "Save"
+                        color: "#096D9B"
+                        font.underline: true
+                    }
+                    onClicked: {
+                        pathManager.updateCustomPath("Images", imagesPath.text)
+                                   pathManager.updateCustomPath("Videos", videosPath.text)
+                                   pathManager.updateCustomPath("Documents", documentsPath.text)
+                                   pathManager.updateCustomPath("Audio", audioPath.text)
+                                   pathManager.updateCustomPath("Archives", archivesPath.text)
+                                   pathManager.updateCustomPath("Code", codePath.text)
+                                   pathManager.updateCustomPath("Executables", executablesPath.text)
+                                   pathManager.updateCustomPath("System", systemPath.text)
+                                   // console.log("Custom organize paths saved!")
+                    }
+                }
+                Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Load Saved"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var saved = pathManager.customPathsAsVariantMap();
+                            if (saved) {
+                                console.log(saved["Images"])
+                                imagesPath.text = saved["Images"] || ""
+                                videosPath.text = saved["Videos"] || ""
+                                documentsPath.text = saved["Documents"] || ""
+                                audioPath.text = saved["Audio"] || ""
+                                archivesPath.text = saved["Archives"] || ""
+                                codePath.text = saved["Code"] || ""
+                                executablesPath.text = saved["Executables"] || ""
+                                systemPath.text = saved["System"] || ""
+                                console.log("Custom organize paths loaded!")
+                            }
+                        }
+                    }
+            }
+
+
         }
 
         // Top controls: Source folder and Category selection

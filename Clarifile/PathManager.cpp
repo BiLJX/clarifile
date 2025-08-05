@@ -1,5 +1,5 @@
 #include "PathManager.h"
-
+#include <QVariantMap>
 PathManager::PathManager(QObject *parent)
     : QObject(parent)
 {
@@ -19,17 +19,42 @@ void PathManager::initDB()
     }
 
     QSqlQuery query;
-    QString createTable = "CREATE TABLE IF NOT EXISTS paths ("
-                          "id INTEGER PRIMARY KEY, "
-                          "root TEXT, "
-                          "destination TEXT)";
-    if (!query.exec(createTable)) {
+
+    // Main paths table (root + destination)
+    QString createPathsTable =
+        "CREATE TABLE IF NOT EXISTS paths ("
+        "id INTEGER PRIMARY KEY, "
+        "root TEXT, "
+        "destination TEXT)";
+    if (!query.exec(createPathsTable)) {
         qWarning() << "Failed to create table:" << query.lastError().text();
     }
 
-    // Insert initial row if none exists
+    // Custom paths table (category + path)
+    QString createCustomTable =
+        "CREATE TABLE IF NOT EXISTS custom_paths ("
+        "category TEXT PRIMARY KEY, "
+        "path TEXT)";
+    if (!query.exec(createCustomTable)) {
+        qWarning() << "Failed to create custom paths table:" << query.lastError().text();
+    }
+
+    // Insert initial row in main paths if none exists
     query.exec("INSERT OR IGNORE INTO paths (id, root, destination) VALUES (1, '', '')");
+
+    // Insert default custom categories
+    QStringList categories = {
+        "Images", "Videos", "Documents", "Audio",
+        "Archives", "Code", "Executables", "System"
+    };
+
+    for (const QString &cat : categories) {
+        query.prepare("INSERT OR IGNORE INTO custom_paths (category, path) VALUES (:cat, '')");
+        query.bindValue(":cat", cat);
+        query.exec();
+    }
 }
+
 
 QString PathManager::rootPath() const
 {
@@ -87,4 +112,53 @@ void PathManager::updateDestPath(const QString &path)
     }
 
     emit pathChanged();
+}
+
+
+QMap<QString, QString> PathManager::customPaths() const
+{
+    QMap<QString, QString> result;
+
+    if (!m_db.isOpen()) return result;
+
+    QSqlQuery query("SELECT category, path FROM custom_paths");
+    while (query.next()) {
+        result[query.value(0).toString()] = query.value(1).toString();
+    }
+    return result;
+}
+
+QVariantMap PathManager::customPathsAsVariantMap() const
+{
+    QVariantMap result;
+
+    if (!m_db.isOpen())
+        return result;
+
+    QSqlQuery query("SELECT category, path FROM custom_paths");
+    while (query.next()) {
+        QString category = query.value(0).toString();
+        QString path = query.value(1).toString();
+        result.insert(category, path);
+    }
+
+    return result;
+}
+
+void PathManager::updateCustomPath(const QString &category, const QString &path)
+{
+    if (!m_db.isOpen()) return;
+
+    QSqlQuery query;
+    query.prepare("INSERT OR REPLACE INTO custom_paths (category, path) VALUES (:category, :path)");
+    query.bindValue(":category", category);
+    query.bindValue(":path", path);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to update custom path:" << query.lastError().text();
+    } else {
+        qDebug() << "Custom path updated successfully for category:" << category;
+    }
+
+    emit customPathsChanged();
 }
