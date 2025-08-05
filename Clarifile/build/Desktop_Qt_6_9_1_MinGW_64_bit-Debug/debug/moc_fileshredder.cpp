@@ -41,13 +41,24 @@ template <> constexpr inline auto FileShredder::qt_create_metaobjectdata<qt_meta
         "FileShredder",
         "logMessage",
         "",
-        "message"
+        "message",
+        "shred",
+        "filePath",
+        "passes"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Signal 'logMessage'
         QtMocHelpers::SignalData<void(const QString &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 3 },
+        }}),
+        // Method 'shred'
+        QtMocHelpers::MethodData<void(const QString &, int)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 5 }, { QMetaType::Int, 6 },
+        }}),
+        // Method 'shred'
+        QtMocHelpers::MethodData<void(const QString &)>(4, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
+            { QMetaType::QString, 5 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -73,6 +84,8 @@ void FileShredder::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->logMessage((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 1: _t->shred((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 2: _t->shred((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
@@ -101,14 +114,14 @@ int FileShredder::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

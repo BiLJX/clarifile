@@ -1,5 +1,10 @@
 QT += core gui
 QT += sql
+QT += quickdialogs2
+QT += widgets
+
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = FileOrganizerShredder

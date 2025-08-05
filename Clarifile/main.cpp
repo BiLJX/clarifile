@@ -6,6 +6,7 @@
 #include "fileorganizer.h"
 #include "FolderPicker.h"
 #include "PathManager.h"
+#include "fileshredder.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +20,9 @@ int main(int argc, char *argv[])
     FolderPicker picker;
     FileOrganizer organizer;
     PathManager pathManager;
+    FileShredder shredder;  // Create instance
 
+    engine.rootContext()->setContextProperty("fileShredder", &shredder);
     engine.rootContext()->setContextProperty("fileOrganizer", &organizer);
     engine.rootContext()->setContextProperty("folderPicker", &picker);
     engine.rootContext()->setContextProperty("pathManager", &pathManager); // ✅ Add this line
