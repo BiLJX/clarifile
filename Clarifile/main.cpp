@@ -6,13 +6,16 @@
 #include "fileorganizer.h"
 #include "FolderPicker.h"
 #include "PathManager.h"
+<<<<<<< HEAD
 #include "fileshredder.h"
+=======
+#include "junkcleaner.h" // 
+>>>>>>> 0b79c87 (Junk Cleaner Feature)
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv); // QWidget support
 
-    // ✅ Set window/taskbar icon
     app.setWindowIcon(QIcon(":/icons/logo.ico"));
 
     QQmlApplicationEngine engine;
@@ -20,12 +23,17 @@ int main(int argc, char *argv[])
     FolderPicker picker;
     FileOrganizer organizer;
     PathManager pathManager;
+<<<<<<< HEAD
     FileShredder shredder;  // Create instance
+=======
+    JunkCleaner junkCleaner; // ✅ Instantiate
+>>>>>>> 0b79c87 (Junk Cleaner Feature)
 
     engine.rootContext()->setContextProperty("fileShredder", &shredder);
     engine.rootContext()->setContextProperty("fileOrganizer", &organizer);
     engine.rootContext()->setContextProperty("folderPicker", &picker);
-    engine.rootContext()->setContextProperty("pathManager", &pathManager); // ✅ Add this line
+    engine.rootContext()->setContextProperty("pathManager", &pathManager);
+    engine.rootContext()->setContextProperty("junkCleaner", &junkCleaner); // ✅ Register for QML
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

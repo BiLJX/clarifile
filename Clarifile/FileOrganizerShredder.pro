@@ -15,14 +15,16 @@ SOURCES += \
     mainwindow.cpp \
     fileorganizer.cpp \
     fileshredder.cpp \
-    pathmanager.cpp
+    pathmanager.cpp \
+    junkcleaner.cpp
 
 HEADERS += \
     FolderPicker.h \
     mainwindow.h \
     fileorganizer.h \
     fileshredder.h \
-    pathmanager.h
+    pathmanager.h \
+    junkcleaner.h
 
 FORMS += \
     mainwindow.ui
