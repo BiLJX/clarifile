@@ -1,4 +1,4 @@
-import QtQuick 2.15 
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
@@ -75,13 +75,13 @@ Item {
                             smooth: true
                         }
                         onClicked: {
-                            junkCleaner.scanJunk()
+                            JunkCleaner.scanJunk()
                             scanCompleted = true
                             cleaningDone = false
                             statusText = ""
                         }
                     }
-                    
+
                 }
 
                 Label {
@@ -246,7 +246,7 @@ RowLayout {
     }
 }
 
-                
+
             }
         }
 

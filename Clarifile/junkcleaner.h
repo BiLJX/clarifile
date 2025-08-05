@@ -17,7 +17,7 @@ public:
 
     QStringList filesToDelete() const;
     qint64 totalSize() const;
-        Q_INVOKABLE void clear();
+    Q_INVOKABLE void clear();
 
 
 signals:
@@ -31,7 +31,7 @@ private:
     qint64 m_totalSize;
 
     void findTempFiles(const QString &dirPath);
-    
+
 };
 
 #endif // JUNKCLEANER_H
