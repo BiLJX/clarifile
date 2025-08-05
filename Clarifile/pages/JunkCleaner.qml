@@ -75,7 +75,7 @@ Item {
                             smooth: true
                         }
                         onClicked: {
-                            JunkCleaner.scanJunk()
+                            junkCleaner.scanJunk()
                             scanCompleted = true
                             cleaningDone = false
                             statusText = ""

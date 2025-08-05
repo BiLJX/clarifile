@@ -34,6 +34,7 @@ qint64 JunkCleaner::totalSize() const {
 }
 
 void JunkCleaner::scanJunk() {
+     qDebug() << "scanJunk called";
     m_filesToDelete.clear();
     m_totalSize = 0;
 
