@@ -115,6 +115,8 @@ void FileOrganizer::customOrganize(const QString &directoryPath, const QMap<QStr
         return;
     }
 
+    emit logMessage("Working");
+
     // Same category definition as default
     QMap<QString, QSet<QString>> categories = {
         { "Images", {"jpg", "jpeg", "png", "gif", "bmp", "svg", "webp", "tiff"} },
@@ -165,4 +167,17 @@ void FileOrganizer::customOrganize(const QString &directoryPath, const QMap<QStr
     }
 
     emit logMessage("Custom Organization Complete!");
+}
+
+void FileOrganizer::customOrganizeFromQml(const QString &directoryPath, const QVariantMap &folders) {
+    QDir dir(directoryPath);
+    if (!dir.exists()) {
+        emit logMessage("Directory does not exist!");
+        return;
+    }
+    QMap<QString, QString> map;
+    for (auto it = folders.begin(); it != folders.end(); ++it) {
+        map[it.key()] = it.value().toString();
+    }
+    customOrganize(directoryPath, map);
 }

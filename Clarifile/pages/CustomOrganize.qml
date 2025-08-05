@@ -91,51 +91,7 @@ Item {
             }
 
             // File Categories to Organize Block
-            Rectangle {
-                color: "#232323"
-                radius: 6
-                Layout.fillWidth: true
-                Layout.preferredWidth: parent.width / 2 - 10
-                height: 100
 
-                ColumnLayout {
-                    anchors.fill: parent
-                    anchors.margins: 16
-                    spacing: 10
-
-                    Label {
-                        text: "File Categories to Organize"
-                        font.pixelSize: 16
-                        font.bold: true
-                        color: "#ffffff"
-                    }
-
-                    RowLayout {
-                        spacing: 12
-                        ComboBox {
-                            id: categorySelector
-                            model: ["Images", "Videos", "Documents"]
-                            Layout.preferredWidth: 150
-                        }
-
-                        TextField {
-                            id: customCategory
-                            placeholderText: "Type here...."
-                            Layout.fillWidth: true
-                            height: 48
-                            font.pixelSize: 13
-                            verticalAlignment: Text.AlignVCenter
-                            background: Rectangle {
-                                anchors.fill: parent
-                                color: "#2C2D30"
-                                radius: 6
-                            }
-                            palette.placeholderText: "#EBE5E5"
-                            color: "#EBE5E5"
-                        }
-                    }
-                }
-            }
         }
 
         // Destination folders section
@@ -143,7 +99,7 @@ Item {
             color: "#1e1e1e"
             radius: 6
             Layout.fillWidth: true
-            height: 180
+            height: 480
 
             ColumnLayout {
                 anchors.fill: parent
@@ -280,18 +236,217 @@ Item {
                             }
                     }
                 }
+
+                // ==== Audio ====
+                RowLayout {
+                    spacing: 12
+                    Layout.fillWidth: true
+                    Label {
+                        text: "Audio"
+                        font.pixelSize: 14
+                        color: "#EBE5E5"
+                        Layout.preferredWidth: 80
+                    }
+
+                    TextField {
+                        id: audioPath
+                        Layout.fillWidth: true
+                        placeholderText: "Choose path....."
+                        height: 48
+                        font.pixelSize: 13
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#2C2D30"
+                            radius: 6
+                        }
+                        palette.placeholderText: "#EBE5E5"
+                        color: "#EBE5E5"
+                    }
+
+                    Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Choose Path"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var path = folderPicker.pickFolder()
+                            if (path !== "")
+                                audioPath.text = path
+                        }
+                    }
+                }
+
+                // ==== Archives ====
+                RowLayout {
+                    spacing: 12
+                    Layout.fillWidth: true
+                    Label {
+                        text: "Archives"
+                        font.pixelSize: 14
+                        color: "#EBE5E5"
+                        Layout.preferredWidth: 80
+                    }
+
+                    TextField {
+                        id: archivesPath
+                        Layout.fillWidth: true
+                        placeholderText: "Choose path....."
+                        height: 48
+                        font.pixelSize: 13
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#2C2D30"
+                            radius: 6
+                        }
+                        palette.placeholderText: "#EBE5E5"
+                        color: "#EBE5E5"
+                    }
+
+                    Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Choose Path"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var path = folderPicker.pickFolder()
+                            if (path !== "")
+                                archivesPath.text = path
+                        }
+                    }
+                }
+
+                // ==== Code ====
+                RowLayout {
+                    spacing: 12
+                    Layout.fillWidth: true
+                    Label {
+                        text: "Code"
+                        font.pixelSize: 14
+                        color: "#EBE5E5"
+                        Layout.preferredWidth: 80
+                    }
+
+                    TextField {
+                        id: codePath
+                        Layout.fillWidth: true
+                        placeholderText: "Choose path....."
+                        height: 48
+                        font.pixelSize: 13
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#2C2D30"
+                            radius: 6
+                        }
+                        palette.placeholderText: "#EBE5E5"
+                        color: "#EBE5E5"
+                    }
+
+                    Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Choose Path"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var path = folderPicker.pickFolder()
+                            if (path !== "")
+                                codePath.text = path
+                        }
+                    }
+                }
+
+                // ==== Executables ====
+                RowLayout {
+                    spacing: 12
+                    Layout.fillWidth: true
+                    Label {
+                        text: "Executables"
+                        font.pixelSize: 14
+                        color: "#EBE5E5"
+                        Layout.preferredWidth: 80
+                    }
+
+                    TextField {
+                        id: executablesPath
+                        Layout.fillWidth: true
+                        placeholderText: "Choose path....."
+                        height: 48
+                        font.pixelSize: 13
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#2C2D30"
+                            radius: 6
+                        }
+                        palette.placeholderText: "#EBE5E5"
+                        color: "#EBE5E5"
+                    }
+
+                    Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Choose Path"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var path = folderPicker.pickFolder()
+                            if (path !== "")
+                                executablesPath.text = path
+                        }
+                    }
+                }
+
+                // ==== System ====
+                RowLayout {
+                    spacing: 12
+                    Layout.fillWidth: true
+                    Label {
+                        text: "System"
+                        font.pixelSize: 14
+                        color: "#EBE5E5"
+                        Layout.preferredWidth: 80
+                    }
+
+                    TextField {
+                        id: systemPath
+                        Layout.fillWidth: true
+                        placeholderText: "Choose path....."
+                        height: 48
+                        font.pixelSize: 13
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: "#2C2D30"
+                            radius: 6
+                        }
+                        palette.placeholderText: "#EBE5E5"
+                        color: "#EBE5E5"
+                    }
+
+                    Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Choose Path"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            var path = folderPicker.pickFolder()
+                            if (path !== "")
+                                systemPath.text = path
+                        }
+                    }
+                }
+
             }
         }
 
 //test of that success or faliure popup
 
-
-            Label {
-                    text: "Testing of Success and faliure (remove this label after logic implementation)"
-                    font.pixelSize: 16
-         
-                    color: "#ffffff"
-                }
 
 
         // Organize Button
@@ -306,15 +461,29 @@ Item {
             padding: 12
            
             onClicked: {
-        var component = Qt.createComponent("SuccessOrFailure.qml")
-        if (component.status === Component.Ready) {
-            var popup = component.createObject(window)
-            popup.open()
-        } else {
-            console.log("Failed to load dialog:", component.errorString())
-        }
-    }
+                var folders = {
+                        "Images": imagesPath.text,
+                        "Videos": videosPath.text,
+                        "Documents": documentsPath.text,
+                        "Audio": audioPath.text,
+                        "Archives": archivesPath.text,
+                        "Code": codePath.text,
+                        "Executables": executablesPath.text,
+                        "System": systemPath.text
+                    }
+                if (sourcePath.text.length > 0 ){
+                    fileOrganizer.customOrganizeFromQml(sourcePath.text, folders)
+                }
+
+                // var component = Qt.createComponent("SuccessOrFailure.qml")
+                // if (component.status === Component.Ready) {
+                //     var popup = component.createObject(window)
+                //     popup.open()
+                // } else {
+                //     console.log("Failed to load dialog:", component.errorString())
+                // }
             }
+        }
      
         
 
