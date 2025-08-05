@@ -3,9 +3,11 @@ release/mainwindow.o
 release/fileorganizer.o
 release/fileshredder.o
 release/pathmanager.o
+release/junkcleaner.o
 release/qrc_resources.o
 release/moc_FolderPicker.o
 release/moc_mainwindow.o
 release/moc_fileorganizer.o
 release/moc_fileshredder.o
 release/moc_pathmanager.o
+release/moc_junkcleaner.o
