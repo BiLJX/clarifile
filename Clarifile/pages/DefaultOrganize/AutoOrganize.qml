@@ -27,6 +27,36 @@ Item {
                 font.pixelSize: 14
                 color: "#cccccc"
             }
+
+            RowLayout {
+                spacing: 20
+                Layout.fillWidth: true
+                Button {
+                    padding: 0
+                    contentItem: Text {
+                        text: "Save"
+                        color: "#096D9B"
+                        font.underline: true
+                    }
+                    onClicked: {
+                        pathManager.updateAutoRootPath(autoRootPath.text)
+                        pathManager.updateAutoDestPath(autoDestPath.text)
+                    }
+                }
+                Button {
+                        padding: 0
+                        contentItem: Text {
+                            text: "Load Saved"
+                            color: "#096D9B"
+                            font.underline: true
+                        }
+                        onClicked: {
+                            autoRootPath.text = pathManager.autoRootPath
+                            autoDestPath.text = pathManager.autoDestPath
+                        }
+                    }
+            }
+
         }
 
         // Auto Root Folder Section

@@ -25,7 +25,9 @@ void PathManager::initDB()
         "CREATE TABLE IF NOT EXISTS paths ("
         "id INTEGER PRIMARY KEY, "
         "root TEXT, "
-        "destination TEXT)";
+        "destination TEXT), "
+       "auto_root TEXT, "
+       "auto_destination TEXT)";
     if (!query.exec(createPathsTable)) {
         qWarning() << "Failed to create table:" << query.lastError().text();
     }
@@ -40,7 +42,9 @@ void PathManager::initDB()
     }
 
     // Insert initial row in main paths if none exists
-    query.exec("INSERT OR IGNORE INTO paths (id, root, destination) VALUES (1, '', '')");
+    query.exec("INSERT OR IGNORE INTO paths "
+               "(id, root, destination, auto_root, auto_destination) "
+               "VALUES (1, '', '', '', '')");
 
     // Insert default custom categories
     QStringList categories = {
@@ -70,11 +74,14 @@ void PathManager::loadPaths()
 {
     if (!m_db.isOpen()) return;
 
-    QSqlQuery query("SELECT root, destination FROM paths WHERE id = 1");
+    QSqlQuery query("SELECT root, destination, auto_root, auto_destination FROM paths WHERE id = 1");
     if (query.next()) {
         m_rootPath = query.value(0).toString();
         m_destPath = query.value(1).toString();
+        m_autoRootPath = query.value(2).toString();
+        m_autoDestPath = query.value(3).toString();
         emit pathChanged();
+        emit autoPathChanged();
     } else {
         qWarning() << "Failed to load paths:" << query.lastError().text();
     }
@@ -161,4 +168,47 @@ void PathManager::updateCustomPath(const QString &category, const QString &path)
     }
 
     emit customPathsChanged();
+}
+
+QString PathManager::autoRootPath() const
+{
+    return m_autoRootPath;
+}
+
+QString PathManager::autoDestPath() const
+{
+    return m_autoDestPath;
+}
+
+
+void PathManager::updateAutoRootPath(const QString &path)
+{
+    if (!m_db.isOpen()) return;
+
+    m_autoRootPath = path;
+    QSqlQuery query;
+    query.prepare("UPDATE paths SET auto_root = :path WHERE id = 1");
+    query.bindValue(":path", path);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to update autoRootPath:" << query.lastError().text();
+    }
+
+    emit autoPathChanged();
+}
+
+void PathManager::updateAutoDestPath(const QString &path)
+{
+    if (!m_db.isOpen()) return;
+
+    m_autoDestPath = path;
+    QSqlQuery query;
+    query.prepare("UPDATE paths SET auto_destination = :path WHERE id = 1");
+    query.bindValue(":path", path);
+
+    if (!query.exec()) {
+        qWarning() << "Failed to update autoDestPath:" << query.lastError().text();
+    }
+
+    emit autoPathChanged();
 }
