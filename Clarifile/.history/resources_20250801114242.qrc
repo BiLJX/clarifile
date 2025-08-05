@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>icons/bulb-blue.svg</file>
+        <file>icons/file-blue.svg</file>
+        <file>icons/file-remove.svg</file>
+        <file>icons/file-text.svg</file>
+        <file>icons/grid.svg</file>
+        <file>icons/help.svg</file>
+        <file>icons/help-circle.svg</file>
+        <file>icons/lightbulb.svg</file>
+        <file>icons/minimize.svg</file>
+        <file>icons/play-circle.svg</file>
+        <file>icons/settings.svg</file>
+        <file>icons/user-circle.svg</file>
+        <file>icons/x.svg</file>
+        <file>common/SideNav.qml</file>
+        <file>pages/DefaultOrganize/AutoOrganize.qml</file>
+        <file>pages/DefaultOrganize/ManualOrganize.qml</file>
+        <file>pages/CustomOrganize.qml</file>
+        <file>pages/FileShredder.qml</file>
+        <file>pages/SuccessOrFailure.qml</file>
+        <file>popups/Failure.qml</file>
+        <file>popups/Success.qml</file>
+        <file>popups/Working.qml</file>
+        <file>icons/auto-organize.svg</file>
+        <file>icons/file-multiple.svg</file>
+        <file>icons/warning.svg</file>
+                   <file>icons/logo.ico</file>
+
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>
