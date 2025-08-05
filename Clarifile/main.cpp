@@ -1,9 +1,33 @@
 #include <QApplication>
-#include "mainwindow.h"
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QIcon>
 
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    MainWindow w;
-    w.show();
+#include "fileorganizer.h"
+#include "FolderPicker.h"
+#include "PathManager.h"
+#include "fileshredder.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv); // QWidget support
+
+    // ✅ Set window/taskbar icon
+    app.setWindowIcon(QIcon(":/icons/logo.ico"));
+
+    QQmlApplicationEngine engine;
+
+    FolderPicker picker;
+    FileOrganizer organizer;
+    PathManager pathManager;
+    FileShredder shredder;  // Create instance
+
+    engine.rootContext()->setContextProperty("fileShredder", &shredder);
+    engine.rootContext()->setContextProperty("fileOrganizer", &organizer);
+    engine.rootContext()->setContextProperty("folderPicker", &picker);
+    engine.rootContext()->setContextProperty("pathManager", &pathManager); // ✅ Add this line
+
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
     return app.exec();
 }

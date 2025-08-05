@@ -1,0 +1,11 @@
+debug/main.o
+debug/mainwindow.o
+debug/fileorganizer.o
+debug/fileshredder.o
+debug/pathmanager.o
+debug/qrc_resources.o
+debug/moc_FolderPicker.o
+debug/moc_mainwindow.o
+debug/moc_fileorganizer.o
+debug/moc_fileshredder.o
+debug/moc_pathmanager.o
