@@ -66,7 +66,7 @@ property string selectedFilePath: ""
 
                     TextField {
                         id: filePathInput
-                        placeholderText: "Select File which you want to shred"
+                        placeholderText: "Select file which you want to permanently delete (shred)"
                         Layout.fillWidth: true
                         height: 48
                         font.pixelSize: 13
