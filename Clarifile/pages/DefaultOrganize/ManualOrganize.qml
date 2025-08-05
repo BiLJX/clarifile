@@ -5,6 +5,9 @@ import QtQuick.Layouts 1.15
 Item {
     anchors.fill: parent
     signal navigateTo(string page)
+    Component.onCompleted: {
+        pathManager.loadPaths();
+    }
 
     property string selectedSourceFolder: ""
     property string selectedDestinationFolder: ""
@@ -63,6 +66,7 @@ Item {
                         placeholderText: "Enter path..."
                         Layout.fillWidth: true
                         font.pixelSize: 13
+                        text: pathManager.rootPath
                         verticalAlignment: Text.AlignVCenter
                         background: Rectangle {
                             color: "#2C2D30"
@@ -79,11 +83,13 @@ Item {
                             color: "#096D9B"
                             font.underline: true
                         }
-                        onClicked: {
-                                var path = folderPicker.pickFolder()
-                                if (path !== "")
-                                srcRootPath.text = path
-                            }
+              onClicked: {
+        var path = folderPicker.pickFolder()
+        if (path !== "") {
+            srcRootPath.text = path
+            pathManager.updateRootPath(path)
+        }
+    }
                     }
                 }
 
@@ -129,6 +135,7 @@ Item {
                         placeholderText: "Enter path..."
                         Layout.fillWidth: true
                         font.pixelSize: 13
+                        text: pathManager.destPath
                         verticalAlignment: Text.AlignVCenter
                         background: Rectangle {
                             color: "#2C2D30"
@@ -148,7 +155,7 @@ Item {
                          onClicked: {
                                  var path = folderPicker.pickFolder()
                                  if (path !== "")
-                                 destPath.text = path
+                                 pathManager.updateDestPath(path)
                              }
                      }
                 }
@@ -235,6 +242,8 @@ Item {
                         })
                     }
                 }
+
+
             }
         }
 

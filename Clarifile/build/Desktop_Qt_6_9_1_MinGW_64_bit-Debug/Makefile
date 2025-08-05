@@ -312,6 +312,7 @@ Makefile: ../../FileOrganizerShredder.pro C:/Qt/6.9.1/mingw_64/mkspecs/win32-g++
 		C:/Qt/6.9.1/mingw_64/lib/Qt6OpenGL.prl \
 		C:/Qt/6.9.1/mingw_64/lib/Qt6Svg.prl \
 		C:/Qt/6.9.1/mingw_64/lib/Qt6Gui.prl \
+		C:/Qt/6.9.1/mingw_64/lib/Qt6Sql.prl \
 		C:/Qt/6.9.1/mingw_64/lib/Qt6QmlMeta.prl \
 		C:/Qt/6.9.1/mingw_64/lib/Qt6QmlModels.prl \
 		C:/Qt/6.9.1/mingw_64/lib/Qt6QmlWorkerScript.prl \
@@ -564,6 +565,7 @@ C:/Qt/6.9.1/mingw_64/lib/Qt6Quick.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6OpenGL.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6Svg.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6Gui.prl:
+C:/Qt/6.9.1/mingw_64/lib/Qt6Sql.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6QmlMeta.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6QmlModels.prl:
 C:/Qt/6.9.1/mingw_64/lib/Qt6QmlWorkerScript.prl:

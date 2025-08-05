@@ -15,7 +15,6 @@
         <file>icons/user-circle.svg</file>
         <file>icons/x.svg</file>
         <file>common/SideNav.qml</file>
-        <file>controllers/PopupController.qml</file>
         <file>pages/DefaultOrganize/AutoOrganize.qml</file>
         <file>pages/DefaultOrganize/ManualOrganize.qml</file>
         <file>pages/CustomOrganize.qml</file>
